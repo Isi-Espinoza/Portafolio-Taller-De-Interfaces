@@ -1,7 +1,6 @@
 # Tarea 04: Sonificación de Datos e Imagen
 
 **Isidora Espinoza Lillo**  
-**Asignatura:** Taller de Interfaces  
 
 ---
 
