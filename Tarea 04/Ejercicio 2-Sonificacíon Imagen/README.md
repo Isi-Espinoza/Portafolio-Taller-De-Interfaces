@@ -5,15 +5,23 @@
 
 ---
 
-## 1. Reproductor de Audio (Huella Sonora Exportada)
+## 1. Muestra Visual y Audio Sonificado
+
+### Imagen Muestra
+![Fotografía Muestra](./foto.jpg)
+
+### Registro Sonora (Audio)
+Escucha la muestra procesada o descárgala en alta calidad:
 
 <audio controls src="audio_huella_sonora.wav"></audio>
+
+💾 **[Descargar Archivo de Audio (.wav)](./audio_huella_sonora.wav)**
 
 ---
 
 ## 2. Descripción y Análisis del Proyecto
 
-### Introducción al Objeto
+### Introducción
 "Huellas Sonoras" es un experimento interactivo de sonificación visual diseñado en entorno web (HTML5, Canvas y Web Audio API). La aplicación permite sintetizar patrones musicales en tiempo real a partir de la exploración cromática y lumínica de cualquier imagen digitalizada. A través de un foco o "linterna focal", la persona que interactúa examina distintas zonas de la fotografía, convirtiendo las coordenadas de su trayectoria, el nivel de iluminación y las relaciones de color en un recorrido melódico personalizado y exportable.
 
 ### Mapeo de Interacciones y Variables
@@ -40,8 +48,8 @@ El algoritmo analiza los píxeles contenidos dentro del radio de exploración y 
 
 ---
 
-## 4. Archivos del Repositorio
-* **`index.html`**: Interfaz web interactiva y motor de síntesis Web Audio API.
-* **`foto.jpg`**: Fotografía base utilizada para la sonificación.
-* **`fondo.jpeg`**: Textura visual de fondo para la interfaz.
-* **`audio_huella_sonora.wav`**: Registro de audio exportado de la exploración visual.
+## 4. Archivos de esta Carpeta
+* **`foto.jpg`**: Imagen fotografiada de muestra utilizada para la exploración cromática.
+* **`audio_huella_sonora.wav`**: Muestra sonora grabada y exportada desde el sistema.
+* **`index.html`**: Código fuente de la aplicación interactiva.
+* **`fondo.jpeg`**: Textura visual utilizada en el lienzo.
