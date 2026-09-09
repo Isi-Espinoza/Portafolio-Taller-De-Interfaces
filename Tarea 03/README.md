@@ -35,10 +35,10 @@ El análisis de la arquitectura mapea las interacciones de control, procesamient
 ## 3. Interfaz Gráfica (Capturas de Pantalla)
 
 ### Modo Presentación (UI)
-![Modo Presentación](assets/modo_presentacion.png)
+![Modo Presentación](modo_presentacion.png)
 
 ### Modo Edición (Lógica del Parche)
-![Modo Edición](assets/modo_edicion.png)
+![Modo Edición](modo_edicion.png)
 
 ---
 
