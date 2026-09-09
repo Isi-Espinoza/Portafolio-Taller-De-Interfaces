@@ -7,9 +7,7 @@
 
 ## 1. Reproductor de Audio
 
-<audio controls src="canciontenis.mp3">
-  Tu navegador no soporta el elemento de audio. <a href="canciontenis.mp3">Haz clic aquí para descargar el audio</a>.
-</audio>
+<audio controls src="canciontenis.mp3"></audio>
 
 ---
 
