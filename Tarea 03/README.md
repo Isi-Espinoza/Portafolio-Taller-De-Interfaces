@@ -7,7 +7,7 @@ Formato: Sintetizador Virtual / Procesamiento de Audio en Tiempo Real
 
 ## 1. Registro y Demostración en Video
 
-*Video de demostración de la interfaz y funcionamiento del sintetizador en tiempo real.*
+Video de demostración de la interfaz y funcionamiento del sintetizador en tiempo real.
 
 <p align="center">
   <a href="https://www.youtube.com/watch?v=L7ei7VBB9Hc" target="_blank">
