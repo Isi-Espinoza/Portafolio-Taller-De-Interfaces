@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonificación de Imágenes - Huellas Sonoras</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background-color: rgba(0, 0, 0, 0.2);
+      background-image: url('fondo.jpeg');
+      background-blend-mode: overlay;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      color: #ffffff;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .main-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      max-width: 1000px;
+      width: 100%;
+    }
+
+    .view {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .welcome-sections {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    /* Layout en 2 columnas para escritorio */
+    .two-columns-container {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .section-card {
+      background: rgba(13, 15, 23, 0.5);
+      backdrop-filter: blur(10px);
+      padding: 25px 30px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      text-align: left;
+    }
+
+    .two-columns-container .section-card {
+      flex: 1;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .title-box {
+      background: transparent;
+      padding: 10px;
+    }
+
+    h1 {
+      color: #00f2fe;
+      margin: 0;
+      font-size: 4.2rem;
+      font-weight: 800;
+      letter-spacing: 2.5px;
+      background: none !important;
+      text-shadow: 
+        0 0 10px rgba(0, 242, 254, 0.8),
+        0 0 18px rgba(0, 119, 255, 0.4);
+    }
+
+    h2 {
+      color: #00f2fe;
+      margin: 10px 0 15px 0;
+      font-size: 1.3rem;
+      font-weight: 700;
+      animation: textGlowPulse 1.8s infinite alternate ease-in-out;
+    }
+
+    .subtitle-static {
+      animation: none !important;
+      text-shadow: 
+        0 0 8px #00f2fe,
+        0 0 18px rgba(0, 119, 255, 0.6);
+    }
+
+    p {
+      color: #e0f7fc;
+      margin: 0;
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+
+    .feature-list, .instruction-list {
+      margin: 10px 0 0 0;
+      padding-left: 20px;
+      color: #e0f7fc;
+      line-height: 1.7;
+      font-size: 1rem;
+    }
+
+    .feature-list li, .instruction-list li {
+      margin-bottom: 8px;
+    }
+
+    .btn-pulsing {
+      background: transparent;
+      color: #00f2fe;
+      border: none;
+      padding: 18px 50px;
+      font-size: 1.6rem;
+      font-weight: 800;
+      border-radius: 35px;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-top: 10px;
+      animation: textGlowPulse 1.8s infinite alternate ease-in-out;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-pulsing:hover {
+      transform: scale(1.08);
+    }
+
+    @keyframes textGlowPulse {
+      0% {
+        opacity: 0.6;
+        text-shadow: 0 0 4px #00f2fe;
+      }
+      100% {
+        opacity: 1;
+        text-shadow: 
+          0 0 8px #00f2fe,
+          0 0 18px #00f2fe,
+          0 0 30px #0077ff;
+      }
+    }
+
+    .header-container {
+      background: rgba(13, 15, 23, 0.5);
+      backdrop-filter: blur(10px);
+      padding: 15px 25px;
+      border-radius: 16px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+      margin-bottom: 15px;
+      width: fit-content;
+      max-width: 95%;
+      white-space: nowrap;
+    }
+
+    .controls-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 15px;
+      width: 100%;
+    }
+
+    .controls-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .control-card {
+      background: rgba(26, 29, 46, 0.85);
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid #00f2fe;
+      backdrop-filter: blur(4px);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #00f2fe;
+    }
+
+    .control-card label {
+      font-weight: 600;
+    }
+
+    .custom-select, .custom-range {
+      background: rgba(13, 15, 23, 0.8);
+      color: #ffffff;
+      border: 1px solid #00f2fe;
+      border-radius: 6px;
+      padding: 4px 8px;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .action-btn {
+      background: rgba(13, 15, 23, 0.8);
+      color: #00f2fe;
+      border: 1px solid #00f2fe;
+      padding: 6px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
+
+    .action-btn:hover:not(:disabled) {
+      background: rgba(0, 242, 254, 0.2);
+      box-shadow: 0 0 10px rgba(0, 242, 254, 0.5);
+    }
+
+    .action-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      border-color: #555;
+      color: #888;
+    }
+
+    .action-btn.recording {
+      background: #ff3366 !important;
+      color: #ffffff !important;
+      border-color: #ff3366 !important;
+      animation: pulseRecord 1s infinite alternate;
+    }
+
+    .action-btn.danger {
+      border-color: #ff4757;
+      color: #ff4757;
+    }
+
+    .action-btn.danger:hover:not(:disabled) {
+      background: rgba(255, 71, 87, 0.2);
+      box-shadow: 0 0 10px rgba(255, 71, 87, 0.5);
+    }
+
+    @keyframes pulseRecord {
+      0% { box-shadow: 0 0 5px #ff3366; }
+      100% { box-shadow: 0 0 18px #ff3366; }
+    }
+
+    .hidden-input {
+      display: none;
+    }
+
+    .file-name-text {
+      color: #ffffff;
+      font-size: 0.95rem;
+      white-space: nowrap;
+    }
+
+    .canvas-container {
+      position: relative;
+      display: inline-block;
+      margin: 5px 0;
+    }
+
+    canvas {
+      width: 500px !important;
+      height: auto !important;
+      max-width: 90vw;
+      border: 2px solid #00f2fe;
+      border-radius: 8px;
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.4);
+      background-color: rgba(0, 0, 0, 0.5);
+      cursor: default;
+    }
+
+    .info-bar {
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(13, 15, 23, 0.85);
+      backdrop-filter: blur(8px);
+      padding: 10px 24px;
+      border-radius: 25px;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+      color: #00f2fe;
+      font-size: 0.95rem;
+      font-weight: 600;
+      min-height: 44px;
+    }
+
+    .info-state {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .idle-text {
+      color: #e0f7fc;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .color-swatch {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #ffffff;
+      box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+      background-color: transparent;
+      transition: background-color 0.1s ease;
+    }
+
+    .note-badge {
+      background: rgba(0, 242, 254, 0.2);
+      color: #ffffff;
+      padding: 2px 8px;
+      border-radius: 6px;
+      border: 1px solid #00f2fe;
+      font-weight: 700;
+    }
+
+    #color-name-display,
+    #brightness-text {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .progress-track {
+      width: 70px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 242, 254, 0.3);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #00f2fe;
+      box-shadow: 0 0 8px #00f2fe;
+      transition: width 0.1s ease;
+    }
+
+    /* Adaptabilidad en pantallas pequeñas */
+    @media (max-width: 768px) {
+      .two-columns-container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="main-wrapper">
+
+    <div id="welcome-view" class="view">
+      <div class="welcome-sections">
+        <div class="title-box">
+          <h1>Huellas Sonoras</h1>
+        </div>
+
+        <div class="section-card text-center">
+          <p>
+            ¡Bienvenido a <strong>Huellas Sonoras</strong>!<br>
+            Un experimento interactivo que sintetiza audio a partir de patrones cromáticos en tiempo real, en dónde cada imagen posee una melodía oculta traducida según sus atributos visuales.
+          </p>
+        </div>
+
+        <div class="two-columns-container">
+          <div class="section-card">
+            <h2 class="text-center subtitle-static">¿Cómo funciona?</h2>
+            <ul class="feature-list">
+              <li><strong>💡 Brillo (Nota):</strong> A mayor luz, tonos más <strong>agudos</strong>; en sombras, más <strong>graves</strong>.</li>
+              <li><strong>🎨 Color (Timbre):</strong> Tonos vivos generan sonidos <strong>resonantes</strong>; tonos apagados, sonidos suaves.</li>
+              <li><strong>✍️ Tu Trazo:</strong> La velocidad y el recorrido crean tu <strong> huella melodíca única</strong>.</li>
+            </ul>
+          </div>
+
+          <div class="section-card">
+            <h2 class="text-center subtitle-static">¿Cómo interactuar?</h2>
+            <ol class="instruction-list">
+              <li>Haz clic en <strong>¡Iniciar Exploración!</strong> para ingresar.</li>
+              <li>Adjunta cualquier imagen desde tu dispositivo.</li>
+              <li>Mueve el cursor sobre la imagen para iluminar áreas con tu linterna focal y escuchar las frecuencias ocultas.</li>
+            </ol>
+          </div>
+        </div>
+
+        <button id="start-btn" class="btn-pulsing">¡Iniciar Exploración!</button>
+      </div>
+    </div>
+
+    <div id="scanner-view" class="view hidden">
+      <h1>Huellas Sonoras</h1>
+      <h2>Escáner Focal de Frecuencias</h2>
+
+      <div class="header-container">
+        <p>Adjunta una imagen y desplaza el cursor para iluminar y traducir las texturas a síntesis de sonido.</p>
+      </div>
+
+      <div class="controls-container">
+        <div class="controls-row">
+          <div class="control-card">
+            <input type="file" id="upload" accept="image/*" class="hidden-input">
+            <button type="button" class="action-btn" onclick="document.getElementById('upload').click()">Seleccionar archivo</button>
+            <span id="file-name" class="file-name-text">Ningún archivo seleccionado</span>
+          </div>
+        </div>
+
+        <div class="controls-row">
+          <div class="control-card">
+            <label for="instrument-select">🎻 Sonido:</label>
+            <select id="instrument-select" class="custom-select">
+              <option value="piano">Piano Acústico</option>
+              <option value="marimba">Marimba Cálida</option>
+              <option value="pad">Pad Ambiental</option>
+            </select>
+          </div>
+
+          <div class="control-card">
+            <label for="radius-range">🔦 Foco:</label>
+            <input type="range" id="radius-range" class="custom-range" min="15" max="70" value="35">
+            <span id="radius-val">35px</span>
+          </div>
+
+          <div class="control-card">
+            <button id="record-btn" class="action-btn">🔴 Grabar Huella</button>
+            <button id="play-btn" class="action-btn" disabled>▶ Reproducir</button>
+            <button id="export-btn" class="action-btn" disabled>🎵 Exportar Audio</button>
+            <button id="delete-btn" class="action-btn danger" disabled>🗑 Eliminar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="canvas-container">
+        <canvas id="canvas"></canvas>
+      </div>
+
+      <div class="info-bar" id="info-bar">
+        <div id="info-idle" class="info-state">
+          <span class="idle-text" id="status-text">🔍 Pasa el cursor sobre la imagen para comenzar la exploración</span>
+        </div>
+
+        <div id="info-active" class="info-state hidden">
+          <div class="info-item">
+            <span>🎹 Nota:</span>
+            <span id="note-display" class="note-badge">--</span>
+          </div>
+          <div class="info-item">
+            <span>🎨 Color:</span>
+            <div id="color-swatch" class="color-swatch"></div>
+            <span id="color-name-display">Ninguno</span>
+          </div>
+          <div class="info-item">
+            <span>✨ Brillo:</span>
+            <div class="progress-track">
+              <div id="brightness-fill" class="progress-fill"></div>
+            </div>
+            <span id="brightness-text">0%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const welcomeView = document.getElementById('welcome-view');
+    const scannerView = document.getElementById('scanner-view');
+    const startBtn = document.getElementById('start-btn');
+
+    const uploadInput = document.getElementById('upload');
+    const fileNameDisplay = document.getElementById('file-name');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d', { willReadFrequently: true });
+
+    const infoIdle = document.getElementById('info-idle');
+    const infoActive = document.getElementById('info-active');
+    const statusText = document.getElementById('status-text');
+
+    const noteDisplay = document.getElementById('note-display');
+    const colorSwatch = document.getElementById('color-swatch');
+    const colorNameDisplay = document.getElementById('color-name-display');
+    const brightnessFill = document.getElementById('brightness-fill');
+    const brightnessText = document.getElementById('brightness-text');
+
+    const instrumentSelect = document.getElementById('instrument-select');
+    const radiusRange = document.getElementById('radius-range');
+    const radiusVal = document.getElementById('radius-val');
+    
+    const recordBtn = document.getElementById('record-btn');
+    const playBtn = document.getElementById('play-btn');
+    const exportBtn = document.getElementById('export-btn');
+    const deleteBtn = document.getElementById('delete-btn');
+
+    let loadedImage = null;
+    let audioCtx = null;
+    let audioStreamDestination = null;
+
+    let mousePos = { x: -1000, y: -1000 };
+    let isMouseOver = false;
+    let flashlightRadius = 35;
+
+    let isRecording = false;
+    let isPlayingRecorded = false;
+    let isPaused = false;
+    let recordedPath = [];
+    let recordStartTime = 0;
+    
+    let playIndex = 0;
+    let playStartTime = 0;
+    let pausedTimeAcc = 0;
+    let pauseStartTimestamp = 0;
+    let animFrameId = null;
+
+    const pianoNotes = [
+      { name: "Do3", freq: 130.81, tag: "Grave" },
+      { name: "Re3", freq: 146.83, tag: "Grave" },
+      { name: "Mi3", freq: 164.81, tag: "Grave" },
+      { name: "Sol3", freq: 196.00, tag: "Medio-Grave" },
+      { name: "La3", freq: 220.00, tag: "Medio-Grave" },
+      { name: "Do4", freq: 261.63, tag: "Medio" },
+      { name: "Re4", freq: 293.66, tag: "Medio" },
+      { name: "Mi4", freq: 329.63, tag: "Medio" },
+      { name: "Sol4", freq: 392.00, tag: "Medio-Agudo" },
+      { name: "La4", freq: 440.00, tag: "Medio-Agudo" },
+      { name: "Do5", freq: 523.25, tag: "Agudo" },
+      { name: "Re5", freq: 587.33, tag: "Agudo" },
+      { name: "Mi5", freq: 659.25, tag: "Agudo" },
+      { name: "Sol5", freq: 783.99, tag: "Muy Agudo" },
+      { name: "La5", freq: 880.00, tag: "Muy Agudo" },
+      { name: "Do6", freq: 1046.50, tag: "Cristalino" }
+    ];
+
+    let currentNoteIndex = -1;
+
+    startBtn.addEventListener('click', () => {
+      welcomeView.classList.add('hidden');
+      scannerView.classList.remove('hidden');
+    });
+
+    radiusRange.addEventListener('input', (e) => {
+      flashlightRadius = parseInt(e.target.value);
+      radiusVal.textContent = `${flashlightRadius}px`;
+      drawScene();
+    });
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        audioStreamDestination = audioCtx.createMediaStreamDestination();
+      } else if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+    }
+
+    function playSound(freq, saturation) {
+      if (!audioCtx) return;
+      const now = audioCtx.currentTime;
+      const type = instrumentSelect.value;
+
+      let finalNode = null;
+
+      if (type === 'piano') {
+        const osc1 = audioCtx.createOscillator();
+        const osc2 = audioCtx.createOscillator();
+        osc1.type = 'triangle';
+        osc2.type = 'sine';
+        osc1.frequency.setValueAtTime(freq, now);
+        osc2.frequency.setValueAtTime(freq * 2, now);
+
+        const filter = audioCtx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(1000 + (saturation * 3000), now);
+
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.3, now + 0.01);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 1.2);
+
+        osc1.connect(filter);
+        osc2.connect(filter);
+        filter.connect(gain);
+        
+        finalNode = gain;
+
+        osc1.start(now); osc2.start(now);
+        osc1.stop(now + 1.2); osc2.stop(now + 1.2);
+
+      } else if (type === 'marimba') {
+        const osc = audioCtx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0.4, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+
+        osc.connect(gain);
+        finalNode = gain;
+
+        osc.start(now);
+        osc.stop(now + 0.3);
+
+      } else if (type === 'pad') {
+        const osc = audioCtx.createOscillator();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+
+        const gain = audioCtx.createGain();
+        gain.gain.setValueAtTime(0, now);
+        gain.gain.linearRampToValueAtTime(0.2, now + 0.4);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 2.0);
+
+        osc.connect(gain);
+        finalNode = gain;
+
+        osc.start(now);
+        osc.stop(now + 2.0);
+      }
+
+      if (finalNode) {
+        finalNode.connect(audioCtx.destination);
+        if (audioStreamDestination) {
+          finalNode.connect(audioStreamDestination);
+        }
+      }
+    }
+
+    function rgbToHsl(r, g, b) {
+      r /= 255; g /= 255; b /= 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h, s, l = (max + min) / 2;
+
+      if (max === min) {
+        h = s = 0;
+      } else {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        switch (max) {
+          case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+          case g: h = (b - r) / d + 2; break;
+          case b: h = (r - g) / d + 4; break;
+        }
+        h /= 6;
+      }
+      return { h: h * 360, s, l };
+    }
+
+    function getColorName(h, s, l) {
+      if (l < 0.15) return "Sombras / Oscuro";
+      if (l > 0.85) return "Blanco / Luz";
+      if (s < 0.15) return "Gris Neutro";
+
+      if (h >= 0 && h < 20) return "Rojo Cálido";
+      if (h >= 20 && h < 45) return "Naranja / Coral";
+      if (h >= 45 && h < 70) return "Amarillo Dorado";
+      if (h >= 70 && h < 165) return "Verde Natural";
+      if (h >= 165 && h < 260) return "Azul Profundo";
+      if (h >= 260 && h < 315) return "Violeta / Púrpura";
+      if (h >= 315 && h < 355) return "Rosa Intenso";
+      return "Rojo Cálido";
+    }
+
+    function drawScene() {
+      if (!loadedImage) return;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(10, 12, 20, 0.75)";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      if (isMouseOver || isPlayingRecorded) {
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(mousePos.x, mousePos.y, flashlightRadius, 0, Math.PI * 2);
+        ctx.clip();
+
+        ctx.drawImage(loadedImage, 0, 0, canvas.width, canvas.height);
+        ctx.restore();
+
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(mousePos.x, mousePos.y, flashlightRadius, 0, Math.PI * 2);
+        ctx.strokeStyle = "#00f2fe";
+        ctx.lineWidth = 2;
+        ctx.shadowColor = "#00f2fe";
+        ctx.shadowBlur = 12;
+        ctx.stroke();
+        ctx.restore();
+      }
+    }
+
+    function analyzeSpotAndPlayAudio(x, y) {
+      if (!audioCtx || !loadedImage) return;
+
+      const sampleSize = 20;
+      const startX = Math.max(0, Math.floor(x - sampleSize / 2));
+      const startY = Math.max(0, Math.floor(y - sampleSize / 2));
+      
+      const imgData = ctx.getImageData(startX, startY, sampleSize, sampleSize).data;
+      
+      let totalR = 0, totalG = 0, totalB = 0;
+      let pixelCount = 0;
+
+      for (let i = 0; i < imgData.length; i += 4) {
+        totalR += imgData[i];
+        totalG += imgData[i + 1];
+        totalB += imgData[i + 2];
+        pixelCount++;
+      }
+
+      const avgR = Math.round(totalR / pixelCount);
+      const avgG = Math.round(totalG / pixelCount);
+      const avgB = Math.round(totalB / pixelCount);
+
+      const { h, s, l } = rgbToHsl(avgR, avgG, avgB);
+
+      const noteIndex = Math.min(
+        pianoNotes.length - 1,
+        Math.floor(l * pianoNotes.length)
+      );
+
+      const currentNote = pianoNotes[noteIndex];
+
+      if (noteIndex !== currentNoteIndex) {
+        currentNoteIndex = noteIndex;
+        playSound(currentNote.freq, s);
+      }
+
+      noteDisplay.textContent = `${currentNote.name} (${currentNote.tag})`;
+      colorSwatch.style.backgroundColor = `rgb(${avgR}, ${avgG}, ${avgB})`;
+      colorNameDisplay.textContent = getColorName(h, s, l);
+      
+      const brightnessPercent = Math.round(l * 100);
+      brightnessFill.style.width = `${brightnessPercent}%`;
+      brightnessText.textContent = `${brightnessPercent}%`;
+    }
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (isPlayingRecorded) return;
+
+      const rect = canvas.getBoundingClientRect();
+      const scaleX = canvas.width / rect.width;
+      const scaleY = canvas.height / rect.height;
+
+      mousePos.x = (e.clientX - rect.left) * scaleX;
+      mousePos.y = (e.clientY - rect.top) * scaleY;
+      isMouseOver = true;
+
+      if (isRecording) {
+        recordedPath.push({
+          time: Date.now() - recordStartTime,
+          x: mousePos.x,
+          y: mousePos.y
+        });
+      }
+
+      infoIdle.classList.add('hidden');
+      infoActive.classList.remove('hidden');
+
+      initAudio();
+      drawScene();
+      analyzeSpotAndPlayAudio(mousePos.x, mousePos.y);
+    });
+
+    canvas.addEventListener('mouseleave', () => {
+      if (isPlayingRecorded) return;
+
+      isMouseOver = false;
+      currentNoteIndex = -1;
+      drawScene();
+      
+      infoActive.classList.add('hidden');
+      infoIdle.classList.remove('hidden');
+    });
+
+    recordBtn.addEventListener('click', () => {
+      if (!isRecording) {
+        isRecording = true;
+        recordedPath = [];
+        recordStartTime = Date.now();
+        recordBtn.textContent = "⏹ Detener";
+        recordBtn.classList.add('recording');
+        
+        playBtn.disabled = true;
+        exportBtn.disabled = true;
+        deleteBtn.disabled = true;
+      } else {
+        isRecording = false;
+        recordBtn.textContent = "🔴 Grabar Huella";
+        recordBtn.classList.remove('recording');
+
+        if (recordedPath.length > 0) {
+          playBtn.disabled = false;
+          exportBtn.disabled = false;
+          deleteBtn.disabled = false;
+        }
+      }
+    });
+
+    playBtn.addEventListener('click', () => {
+      if (recordedPath.length === 0) return;
+
+      if (!isPlayingRecorded) {
+        isPlayingRecorded = true;
+        isPaused = false;
+        isMouseOver = false;
+        recordBtn.disabled = true;
+        exportBtn.disabled = true;
+        deleteBtn.disabled = true;
+        playBtn.textContent = "⏸ Pausar";
+
+        infoIdle.classList.add('hidden');
+        infoActive.classList.remove('hidden');
+
+        initAudio();
+
+        playIndex = 0;
+        playStartTime = performance.now();
+        pausedTimeAcc = 0;
+        
+        requestAnimationFrame(playbackStep);
+
+      } else if (isPlayingRecorded && !isPaused) {
+        isPaused = true;
+        pauseStartTimestamp = performance.now();
+        playBtn.textContent = "▶ Reanudar";
+        if (animFrameId) cancelAnimationFrame(animFrameId);
+
+      } else if (isPlayingRecorded && isPaused) {
+        isPaused = false;
+        pausedTimeAcc += (performance.now() - pauseStartTimestamp);
+        playBtn.textContent = "⏸ Pausar";
+        requestAnimationFrame(playbackStep);
+      }
+    });
+
+    exportBtn.addEventListener('click', async () => {
+      if (recordedPath.length === 0) return;
+
+      initAudio();
+      statusText.textContent = "⏳ Procesando y exportando archivo de audio...";
+      infoActive.classList.add('hidden');
+      infoIdle.classList.remove('hidden');
+
+      recordBtn.disabled = true;
+      playBtn.disabled = true;
+      exportBtn.disabled = true;
+      deleteBtn.disabled = true;
+
+      const audioChunks = [];
+      const mediaRecorder = new MediaRecorder(audioStreamDestination.stream);
+
+      mediaRecorder.ondataavailable = (evt) => {
+        if (evt.data.size > 0) {
+          audioChunks.push(evt.data);
+        }
+      };
+
+      mediaRecorder.onstop = () => {
+        const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+        const url = URL.createObjectURL(audioBlob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `huella_sonora_${Date.now()}.wav`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        statusText.textContent = "🔍 Pasa el cursor sobre la imagen para comenzar la exploración";
+        recordBtn.disabled = false;
+        playBtn.disabled = false;
+        exportBtn.disabled = false;
+        deleteBtn.disabled = false;
+      };
+
+      mediaRecorder.start();
+
+      let renderIndex = 0;
+      const renderStartTime = performance.now();
+
+      function stepRender(now) {
+        const elapsed = now - renderStartTime;
+
+        while (renderIndex < recordedPath.length && recordedPath[renderIndex].time <= elapsed) {
+          const pt = recordedPath[renderIndex];
+          mousePos.x = pt.x;
+          mousePos.y = pt.y;
+          drawScene();
+          analyzeSpotAndPlayAudio(pt.x, pt.y);
+          renderIndex++;
+        }
+
+        if (renderIndex < recordedPath.length) {
+          requestAnimationFrame(stepRender);
+        } else {
+          setTimeout(() => {
+            mediaRecorder.stop();
+          }, 600);
+        }
+      }
+
+      isPlayingRecorded = true;
+      requestAnimationFrame(stepRender);
+    });
+
+    deleteBtn.addEventListener('click', () => {
+      if (confirm("¿Estás seguro de que deseas eliminar la huella sonora grabada?")) {
+        recordedPath = [];
+        playBtn.disabled = true;
+        exportBtn.disabled = true;
+        deleteBtn.disabled = true;
+        playBtn.textContent = "▶ Reproducir";
+      }
+    });
+
+    function playbackStep(timestamp) {
+      if (isPaused) return;
+
+      const elapsed = timestamp - playStartTime - pausedTimeAcc;
+
+      while (playIndex < recordedPath.length && recordedPath[playIndex].time <= elapsed) {
+        const point = recordedPath[playIndex];
+        mousePos.x = point.x;
+        mousePos.y = point.y;
+        drawScene();
+        analyzeSpotAndPlayAudio(mousePos.x, mousePos.y);
+        playIndex++;
+      }
+
+      if (playIndex < recordedPath.length) {
+        animFrameId = requestAnimationFrame(playbackStep);
+      } else {
+        isPlayingRecorded = false;
+        isPaused = false;
+        recordBtn.disabled = false;
+        playBtn.disabled = false;
+        exportBtn.disabled = false;
+        deleteBtn.disabled = false;
+        playBtn.textContent = "▶ Reproducir";
+        infoActive.classList.add('hidden');
+        infoIdle.classList.remove('hidden');
+        drawScene();
+      }
+    }
+
+    uploadInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+
+      fileNameDisplay.textContent = file.name;
+
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          loadedImage = img;
+          canvas.width = 600;
+          canvas.height = Math.round(600 * (img.height / img.width));
+          drawScene();
+        };
+        img.src = event.target.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  </script>
+
+</body>
+</html>
