@@ -7,7 +7,9 @@ Formato: Sintetizador Virtual / Procesamiento de Audio en Tiempo Real
 
 ## 1. Registro y Demostración en Video
 
-<iframe width="100%" height="400" src="https://www.youtube.com/embed/L7ei7VBB9Hc?si=3-ZDE_HUZsulLhoM" title="T03 - Sintetizador Virtual" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+[![Ver Demo en YouTube](https://img.youtube.com/vi/L7ei7VBB9Hc/maxresdefault.jpg)](https://www.youtube.com/watch?v=L7ei7VBB9Hc)
+
+*Haz clic en la imagen superior para ver el video de demostración en YouTube.*
 
 ---
 
