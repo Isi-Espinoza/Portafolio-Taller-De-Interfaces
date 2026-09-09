@@ -7,54 +7,22 @@
 
 ## 1. Visión General de la Tarea
 
-La **Tarea 04** explora el concepto de **Sonificación**, transformando entradas de datos abstractos y atributos visuales en experiencia auditiva. El proyecto se articula en dos ejercicios complementarios:
+La **Tarea 04** aborda el concepto de **Sonificación**, explorando cómo los datos cuantitativos y las variables cromáticas de una imagen pueden traducirse en experiencias auditivas y piezas musicales mediante síntesis de audio.
 
-* **Ejercicio 1: Sonificación de Datos:** Traducción de datasets numéricos a estructuras sonoras y composiciones melódicas.
-* **Ejercicio 2: Sonificación de Imagen (Huellas Sonoras):** Algoritmo interactivo de síntesis en tiempo real a partir del análisis cromático ($HSL$) y lumínico de pixeles.
+Esta entrega se divide en dos módulos de exploración complementarios:
 
----
-
-## 2. Ejercicio 1: Sonificación de Datos
-
-Traducción de variables numéricas y cuantitativas a parámetros de audio, generando una pieza sonora estructurada a partir de un conjunto de datos.
-
-### Canción Generada (Audio)
-
-<audio controls src="./Ejercicio 1-Sonificación de Datos/audio_datos.wav"></audio>
-
-💾 **[Descargar Audio del Ejercicio 1 (.wav)](./Ejercicio%201-Sonificación%20de%20Datos/audio_datos.wav)**  
-📂 **[Ver Documentación Completa del Ejercicio 1](./Ejercicio%201-Sonificación%20de%20Datos)**
+1. **Sonificación de Datos:** Traducción de datasets numéricos a estructuras y composiciones melódicas.
+2. **Sonificación de Imagen (Huellas Sonoras):** Algoritmo interactivo en tiempo real que mapea luminosidad ($L$), saturación ($S$) y coordenadas espacio-temporales $(X,Y)$ hacia notas MIDI y filtros de frecuencia.
 
 ---
 
-## 3. Ejercicio 2: Sonificación de Imagen (Huellas Sonoras)
+## 2. Accesos a los Ejercicios
 
-Aplicación web interactiva que permite explorar una fotografía mediante un foco de luz, convirtiendo coordenadas, luminosidad y saturación en frecuencias y timbres sintéticos.
+Para revisar el código fuente, la documentación técnica, los reproductores de audio y las muestras de cada proyecto, accede a sus respectivas carpetas:
 
-### Muestra Visual y Audio Resultante
+* 🎵 **[Ejercicio 1: Sonificación de Datos](./Ejercicio%201-Sonificación%20de%20Datos)**  
+  *Contiene la documentación del mapeo de datos y el archivo de audio final generado.*
 
-#### Fotografía Utilizada
-![Imagen Muestra](./Ejercicio%202-Sonificación%20Imagen/foto.jpg)
-
-#### Huella Sonora Grabada
-<audio controls src="./Ejercicio%202-Sonificación%20Imagen/audio_huella_sonora.wav"></audio>
-
-💾 **[Descargar Huella Sonora (.wav)](./Ejercicio%202-Sonificación%20Imagen/audio_huella_sonora.wav)**  
-📂 **[Ver Documentación y Código del Ejercicio 2](./Ejercicio%202-Sonificación%20Imagen)**
-
----
-
-## 4. Estructura de la Carpeta
-
-```text
-Tarea 04/
-├── Ejercicio 1-Sonificación de Datos/
-│   ├── audio_datos.wav
-│   └── README.md
-├── Ejercicio 2-Sonificación Imagen/
-│   ├── audio_huella_sonora.wav
-│   ├── fondo.jpeg
-│   ├── foto.jpg
-│   ├── index.html
-│   └── README.md
-└── README.md
+* 🖼️ **[Ejercicio 2: Sonificación de Imagen (Huellas Sonoras)](./Ejercicio%202-Sonificación%20Imagen)**  
+  *Contiene el juego interactivo (`index.html`), la fotografía de muestra, la textura de fondo y el archivo audio `.wav` exportado.*
+  
