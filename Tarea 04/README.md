@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Visión General de la Tarea
+## 1. Descripción
 
 La **Tarea 04** aborda el concepto de **Sonificación**, explorando cómo los datos cuantitativos y las variables cromáticas de una imagen pueden traducirse en experiencias auditivas y piezas musicales mediante síntesis de audio.
 
@@ -20,9 +20,8 @@ Esta entrega se divide en dos módulos de exploración complementarios:
 
 Para revisar el código fuente, la documentación técnica, los reproductores de audio y las muestras de cada proyecto, accede a sus respectivas carpetas:
 
-* 🎵 **[Ejercicio 1: Sonificación de Datos](./Ejercicio%201-Sonificación%20de%20Datos)**  
+* 🎵 [Ejercicio 1: Sonificación de Datos](./Ejercicio 1-Sonificación de Datos)  
   *Contiene la documentación del mapeo de datos y el archivo de audio final generado.*
 
-* 🖼️ **[Ejercicio 2: Sonificación de Imagen](./Ejercicio%202-Sonificación%20Imagen)**  
+* 🖼️ [Ejercicio 2: Sonificación de Imagen](./Ejercicio 2-Sonificacíon Imagen)  
   *Contiene el juego interactivo (`index.html`), la fotografía de muestra, la textura de fondo y el archivo audio `.wav` exportado.*
-  
