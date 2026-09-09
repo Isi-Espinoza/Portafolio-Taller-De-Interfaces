@@ -14,8 +14,8 @@ Repositorio de entregas y proyectos para el Taller de Interfaces.
 
 📁 **Tarea 02: Edición de Sonido y Experiencia Educativa**
 
-* 📄 **Documentación:** [Ver README y detalles de la Tarea 02](./Tarea-02/README.md)
-* 🌐 **Juego Web en Vivo:** [Ecos en la Oscuridad](https://isi-espinoza.github.io/Portafolio-Taller-De-Interfaces/Tarea-02/index.html)
+* 📄 **Documentación:** Revisa el contenido de la carpeta.
+* 🌐 **Juego:** [Ecos en la Oscuridad](https://isi-espinoza.github.io/Portafolio-Taller-De-Interfaces/Tarea-02/)
 
 ---
 
