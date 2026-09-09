@@ -11,7 +11,7 @@
 ![Fotografía Muestra](./foto.jpg)
 
 ### Registro Sonora (Audio)
-Escucha la muestra procesada o descárgala en alta calidad:
+Descarga la muestra.
 
 <audio controls src="audio_huella_sonora.wav"></audio>
 
