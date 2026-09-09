@@ -1,6 +1,7 @@
+# Tarea 01: Análisis de Interfaces — Cafetera FRIGIDAIRE
+
 Isidora Espinoza Lillo  
-**Proyecto:** T01 - Análisis de Interfaces — Cafetera FRIGIDAIRE  
-**Formato:** Esquemático 
+**Formato:** Esquemático
 
 ---
 
