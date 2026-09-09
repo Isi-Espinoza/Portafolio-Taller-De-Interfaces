@@ -7,7 +7,7 @@ Isidora Espinoza Lillo
 
 ## 1. Experiencia Interactiva
 
-* 🌐 **Juego Web** [Abrir Ecos en la Oscuridad](https://isi-espinoza.github.io/Portafolio-Taller-De-Interfaces/Tarea-02/index.html)
+**Juego Web:** [Abrir Ecos en la Oscuridad](https://isi-espinoza.github.io/Portafolio-TallerDelInterfaces/Tarea-02/)
 
 ---
 
