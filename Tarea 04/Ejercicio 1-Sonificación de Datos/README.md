@@ -5,7 +5,7 @@
 
 ---
 
-## 1. Reproductor de Audio
+## 1. Audio
 
 <audio controls src="canciontenis.mp3"></audio>
 
