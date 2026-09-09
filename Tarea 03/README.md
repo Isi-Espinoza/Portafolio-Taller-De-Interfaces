@@ -7,6 +7,8 @@ Formato: Sintetizador Virtual / Procesamiento de Audio en Tiempo Real
 
 ## 1. Registro y Demostración en Video
 
+*Video de demostración de la interfaz y funcionamiento del sintetizador en tiempo real.*
+
 <p align="center">
   <a href="https://www.youtube.com/watch?v=L7ei7VBB9Hc" target="_blank">
     <img src="https://img.youtube.com/vi/L7ei7VBB9Hc/maxresdefault.jpg" alt="Ver video de demostración en YouTube" width="80%">
@@ -17,8 +19,6 @@ Formato: Sintetizador Virtual / Procesamiento de Audio en Tiempo Real
   <em>Haz clic en la imagen superior para ver el video en YouTube.</em><br>
   O accede directamente aquí: <a href="https://www.youtube.com/watch?v=L7ei7VBB9Hc" target="_blank">https://www.youtube.com/watch?v=L7ei7VBB9Hc</a>
 </p>
-
-*Video de demostración de la interfaz y funcionamiento del sintetizador en tiempo real.*
 
 ---
 
