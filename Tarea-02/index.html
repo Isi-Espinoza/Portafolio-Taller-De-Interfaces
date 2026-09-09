@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonido y Experiencia Educativa Interactiva</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            user-select: none;
+        }
+
+        body {
+            background-color: #000;
+            color: #e0e0e0;
+            font-family: 'Courier New', Courier, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('fondolaberinto.jpg'); 
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.4) grayscale(0.5) contrast(1.4);
+            z-index: -2;
+        }
+
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle, rgba(15, 0, 0, 0.4) 20%, rgba(0, 0, 0, 0.95) 90%);
+            z-index: -1;
+        }
+
+        #game-container {
+            width: auto;
+            max-width: 1200px;
+            background-color: transparent;
+            backdrop-filter: none;
+            border: none;
+            box-shadow: none;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            color: #8b0000;
+            letter-spacing: 4px;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+            font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        .subtitle {
+            color: #ff3333;
+            font-size: clamp(0.85rem, 2vw, 1.3rem);
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            text-transform: uppercase;
+            animation: pulse 2s infinite;
+            white-space: nowrap;
+            width: 100%;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; transform: scale(1); }
+            50% { opacity: 1; text-shadow: 0 0 12px #ff0000; transform: scale(1.03); }
+            100% { opacity: 0.6; transform: scale(1); }
+        }
+
+        #hud {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 15px;
+            font-size: clamp(0.85rem, 1.5vw, 1.15rem);
+            font-weight: bold;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            width: 100%;
+        }
+
+        .mode-tag { color: #ffaa00; }
+        .danger { color: #ff3333; }
+
+        #instructions {
+            margin-bottom: 15px;
+            font-size: clamp(0.85rem, 1.6vw, 1.1rem);
+            color: #ffcccc;
+            min-height: 35px;
+            font-weight: bold;
+            width: 100%;
+        }
+
+        #audio-btn {
+            background: rgba(42, 8, 8, 0.9);
+            color: #ff6666;
+            border: 2px solid #8b0000;
+            padding: 12px 30px;
+            font-size: clamp(0.85rem, 1.5vw, 1.1rem);
+            font-family: inherit;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-radius: 4px;
+            transition: all 0.2s;
+            box-shadow: 0 0 10px rgba(139, 0, 0, 0.4);
+        }
+
+        #audio-btn:hover {
+            background: #4a0e0e;
+            box-shadow: 0 0 15px #8b0000;
+        }
+
+        #options-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 10px;
+            width: 90vw;
+            max-width: 900px;
+        }
+
+        .option-card {
+            background-color: rgba(20, 20, 20, 0.9);
+            border: 2px solid #282828;
+            border-radius: 6px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .option-card:hover {
+            transform: scale(1.02);
+            border-color: #ff3333;
+            box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+        }
+
+        .option-card img {
+            width: 100%;
+            height: 110px;
+            object-fit: contain;
+            display: block;
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 10px;
+            filter: brightness(0.65) contrast(0.9);
+            transition: filter 0.3s ease;
+        }
+
+        .option-card:hover img {
+            filter: brightness(0.95) contrast(1);
+        }
+
+        .option-card p {
+            padding: 10px;
+            font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+            background-color: rgba(17, 17, 17, 0.95);
+            color: #ccc;
+        }
+
+        #welcome-screen, #overlay {
+            position: relative;
+            width: auto;
+            height: auto;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            padding: 0;
+        }
+
+        #overlay-msg {
+            text-align: center;
+            margin-top: 10px;
+            font-size: clamp(0.65rem, 1.4vw, 1rem);
+            white-space: nowrap;
+            width: max-content;
+            max-width: 95vw;
+            color: #e0e0e0;
+        }
+
+        .sublabel-white {
+            margin-top: 10px;
+            font-size: clamp(0.65rem, 1.4vw, 1rem);
+            color: #e0e0e0;
+            white-space: nowrap;
+        }
+
+        .sublabel-red {
+            margin-top: 8px;
+            font-size: clamp(0.85rem, 1.6vw, 1.2rem);
+            color: #8b0000;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px rgba(255, 0, 0, 0.7);
+            white-space: nowrap;
+        }
+
+        .mode-select {
+            margin: 15px 0 10px 0;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            width: auto;
+        }
+
+        .mode-btn {
+            background: #1a1a1a;
+            color: #aaa;
+            border: 2px solid #444;
+            padding: 10px 20px;
+            font-size: clamp(0.75rem, 1.2vw, 0.95rem);
+            font-family: inherit;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .mode-btn.active {
+            background: #4a0000;
+            color: #fff;
+            border-color: #ff3333;
+            box-shadow: 0 0 10px #ff0000;
+        }
+
+        .btn-start, .btn-secondary {
+            background-color: #8b0000;
+            color: #fff;
+            border: 2px solid #ff3333;
+            padding: 15px 35px;
+            font-size: clamp(0.95rem, 1.8vw, 1.35rem);
+            font-family: inherit;
+            cursor: pointer;
+            margin-top: 10px;
+            border-radius: 6px;
+            box-shadow: 0 0 15px rgba(139, 0, 0, 0.8);
+            transition: all 0.2s;
+        }
+
+        .btn-start {
+            animation: pulse 2s infinite;
+        }
+
+        .btn-secondary {
+            background-color: rgba(20, 20, 20, 0.8);
+            border-color: #555;
+            color: #ccc;
+            padding: 12px 25px;
+            font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+            animation: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: #333;
+            border-color: #888;
+            color: #fff;
+        }
+
+        .btn-start:hover { 
+            background-color: #b30000; 
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-content {
+            background: #111;
+            border: 2px solid #8b0000;
+            border-radius: 8px;
+            padding: 25px 35px;
+            max-width: 850px;
+            width: 90%;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+            text-align: center;
+        }
+
+        .modal-content p {
+            white-space: nowrap;
+        }
+
+        .sound-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .sound-item {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            padding: 15px 10px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .sound-item button {
+            background: #4a0e0e;
+            color: #ff9999;
+            border: 1px solid #ff3333;
+            padding: 6px 12px;
+            font-family: inherit;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.85rem;
+        }
+
+        .sound-item button:hover {
+            background: #8b0000;
+            color: #fff;
+        }
+
+        .close-btn {
+            background: #333;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 8px 20px;
+            font-family: inherit;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+
+        .close-btn:hover {
+            background: #555;
+        }
+
+        .hidden { display: none !important; }
+
+        @media (max-width: 768px) {
+            #options-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .sound-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image"></div>
+    <div class="bg-overlay"></div>
+
+    <div id="game-container">
+        <!-- PANTALLA INICIAL / BIENVENIDA -->
+        <div id="welcome-screen">
+            <h1>Laberinto de Terror</h1>
+            <div class="subtitle">Ecos en la Oscuridad</div>
+            
+            <p style="max-width: 650px; text-align: center; margin: 15px 0; font-size: clamp(0.85rem, 1.5vw, 1.05rem); line-height: 1.6; color: #ddd;">
+                ¡Bienvenidos!<br>
+                Te encuentras atrapado en el laberinto Ecos en la Oscuridad.<br>
+                Escucha atentamente el entorno, identifica el peligro inminente y neutralízalo para salir con vida.<br>
+                Deberás entrenar tu percepción auditiva para superar el laberinto y sobrevivir, cada amenaza emitirá un sonido distintivo.<br>
+                Usa la opción "Reconocer Sonidos" para familiarizarte antes de empezar.<br>
+                ¿Serás capaz de neutralizar los peligros del laberinto a tiempo?<br>
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 10px; justify-content: center; align-items: center; width: 100%;">
+                <button class="btn-secondary" onclick="openSoundModal()">🔊 Reconocer Sonidos</button>
+                <button class="btn-start" onclick="goToModeSelection()">¡INICIAR!</button>
+            </div>
+        </div>
+
+        <!-- VENTANA DE SELECCIÓN DE MODO Y ENTRADA AL LABERINTO -->
+        <div id="overlay" class="hidden">
+            <h1 id="overlay-title">ECOS EN LA OSCURIDAD</h1>
+            <p id="overlay-msg">
+                Escucha atentamente el entorno, identifica y neutraliza la amenaza.
+            </p>
+            
+            <p class="sublabel-white">Elige tu modo de juego:</p>
+
+            <div class="mode-select">
+                <button class="mode-btn active" id="btn-mode-train" onclick="setGameMode('train')">Modo Entrenamiento</button>
+                <button class="mode-btn" id="btn-mode-real" onclick="setGameMode('real')">Modo Real</button>
+            </div>
+
+            <p class="sublabel-red">A JUGAR...</p>
+
+            <button id="start-btn" class="btn-start" style="margin-top: 8px;" onclick="startGame()">¡ENTRAR AL LABERINTO!</button>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL DEL JUEGO -->
+        <div id="main-game" class="hidden">
+            <h1>Ecos en la Oscuridad</h1>
+            <div class="subtitle">¡NEUTRALIZA LA AMENAZA!</div>
+            
+            <div id="hud">
+                <div>Modo: <span id="mode-display" class="mode-tag">Entrenamiento</span></div>
+                <div>Nivel: <span id="step-count">1</span>/5</div>
+                <div class="danger">Vidas: <span id="lives-count">3</span></div>
+            </div>
+
+            <div id="instructions">Presiona 'Escuchar' para detectar el peligro de la zona.</div>
+
+            <button id="audio-btn" onclick="playCurrentAudio()">🔊 Escuchar</button>
+
+            <div id="options-grid"></div>
+        </div>
+    </div>
+
+    <!-- MODAL DE VISTA PREVIA DE SONIDOS -->
+    <div id="sound-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 style="color: #ff3333; margin-bottom: 10px;">Biblioteca de Sonidos</h2>
+            <p style="font-size: 0.9rem; color: #aaa; margin-bottom: 10px;">Escucha y reconoce los sonidos de las amenazas antes de ingresar.</p>
+            
+            <div class="sound-list">
+                <div class="sound-item">
+                    <span style="font-weight: bold; color: #ffaa00;">Fuga de Gas</span>
+                    <button onclick="playLocalSound('audio/fuga_gas.mp3')">▶ Escuchar</button>
+                </div>
+                <div class="sound-item">
+                    <span style="font-weight: bold; color: #ffaa00;">Jauría Perros</span>
+                    <button onclick="playLocalSound('audio/jauria_perros.mp3')">▶ Escuchar</button>
+                </div>
+                <div class="sound-item">
+                    <span style="font-weight: bold; color: #ffaa00;">Motosierra</span>
+                    <button onclick="playLocalSound('audio/motosierra.mp3')">▶ Escuchar</button>
+                </div>
+                <div class="sound-item">
+                    <span style="font-weight: bold; color: #ffaa00;">Inundación</span>
+                    <button onclick="playLocalSound('audio/inundacion.mp3')">▶ Escuchar</button>
+                </div>
+                <div class="sound-item">
+                    <span style="font-weight: bold; color: #ffaa00;">Cortocircuito</span>
+                    <button onclick="playLocalSound('audio/cortocircuito.mp3')">▶ Escuchar</button>
+                </div>
+                <div class="sound-item">
+                    <span style="font-weight: bold; color: #ffaa00;">Enjambre Abejas</span>
+                    <button onclick="playLocalSound('audio/enjambre_abejas.mp3')">▶ Escuchar</button>
+                </div>
+            </div>
+
+            <button class="close-btn" onclick="closeSoundModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script>
+        let currentAudioPlayer = null;
+
+        function stopCurrentSound() {
+            if (currentAudioPlayer) {
+                currentAudioPlayer.pause();
+                currentAudioPlayer.currentTime = 0;
+                currentAudioPlayer = null;
+            }
+        }
+
+        function playLocalSound(soundFile) {
+            stopCurrentSound();
+
+            if (!soundFile) return;
+
+            currentAudioPlayer = new Audio(soundFile);
+            currentAudioPlayer.play().catch(error => {
+                console.error("Error al reproducir el archivo de audio: " + soundFile, error);
+            });
+        }
+
+        // Se asignan las rutas dentro de la carpeta /audio
+        const allThreats = [
+            { id: 'gas', title: "Fuga de Gas", img: "iconogas.jpg", sound: "audio/fuga_gas.mp3" },
+            { id: 'dogs', title: "Jauría de Perros", img: "iconoperros.jpg", sound: "audio/jauria_perros.mp3" },
+            { id: 'saw', title: "Motosierra", img: "iconomotosierra.jpg", sound: "audio/motosierra.mp3" },
+            { id: 'water', title: "Inundación", img: "iconoinundacion.jpg", sound: "audio/inundacion.mp3" },
+            { id: 'sparks', title: "Cortocircuito", img: "iconocortocircuito.jpg", sound: "audio/cortocircuito.mp3" },
+            { id: 'bees', title: "Enjambre de Abejas", img: "iconoenjambre.jpg", sound: "audio/enjambre_abejas.mp3" }
+        ];
+
+        let activeLevels = [];
+        let currentStep = 0;
+        let lives = 3;
+        let hasHeardAudio = false;
+        let selectedMode = 'train';
+
+        function openSoundModal() {
+            document.getElementById('sound-modal').classList.remove('hidden');
+        }
+
+        function closeSoundModal() {
+            stopCurrentSound();
+            document.getElementById('sound-modal').classList.add('hidden');
+        }
+
+        function goToModeSelection() {
+            stopCurrentSound();
+            document.getElementById('welcome-screen').classList.add('hidden');
+            document.getElementById('overlay').classList.remove('hidden');
+        }
+
+        function setGameMode(mode) {
+            selectedMode = mode;
+            document.getElementById('btn-mode-train').classList.toggle('active', mode === 'train');
+            document.getElementById('btn-mode-real').classList.toggle('active', mode === 'real');
+        }
+
+        function startGame() {
+            stopCurrentSound();
+            currentStep = 0;
+            lives = 3;
+
+            // Mantiene exactamente los 5 niveles pedidos
+            const targetSoundTypes = ['gas', 'dogs', 'saw', 'sparks', 'bees'];
+            
+            activeLevels = targetSoundTypes.map(targetType => {
+                const shuffledOptions = [...allThreats].sort(() => Math.random() - 0.5);
+                const correctIdx = shuffledOptions.findIndex(opt => opt.id === targetType);
+                
+                return {
+                    targetType: targetType,
+                    correctIndex: correctIdx,
+                    options: shuffledOptions
+                };
+            });
+
+            document.getElementById('lives-count').innerText = lives;
+            document.getElementById('mode-display').innerText = selectedMode === 'train' ? 'Entrenamiento' : 'Real';
+            
+            document.getElementById('overlay').classList.add('hidden');
+            document.getElementById('main-game').classList.remove('hidden');
+            
+            loadLevel();
+        }
+
+        function loadLevel() {
+            stopCurrentSound();
+            hasHeardAudio = false;
+            document.getElementById('audio-btn').disabled = false;
+            document.getElementById('step-count').innerText = currentStep + 1;
+            document.getElementById('instructions').innerText = "Presiona 'Escuchar' para detectar el peligro de la zona.";
+
+            const grid = document.getElementById('options-grid');
+            grid.innerHTML = '';
+            
+            activeLevels[currentStep].options.forEach((opt, idx) => {
+                const card = document.createElement('div');
+                card.className = 'option-card';
+                card.onclick = () => makeChoice(idx);
+                
+                const label = selectedMode === 'real' ? `Opción ${idx + 1}` : `${idx + 1}. Neutralizar ${opt.title}`;
+                
+                card.innerHTML = `
+                    <img src="${opt.img}" alt="${opt.title}">
+                    <p>${label}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function playCurrentAudio() {
+            const currentLevel = activeLevels[currentStep];
+            const targetObject = allThreats.find(t => t.id === currentLevel.targetType);
+
+            if (targetObject && targetObject.sound) {
+                playLocalSound(targetObject.sound);
+            }
+
+            document.getElementById('instructions').innerText = "¡Atención! Elige el peligro correcto para neutralizarlo y ¡CORRE!.";
+            hasHeardAudio = true;
+        }
+
+        function makeChoice(selectedIndex) {
+            if (!hasHeardAudio) {
+                alert("Primero debes escuchar el sonido.");
+                return;
+            }
+
+            stopCurrentSound();
+            const currentLevel = activeLevels[currentStep];
+
+            if (selectedIndex === currentLevel.correctIndex) {
+                currentStep++;
+                if (currentStep >= activeLevels.length) {
+                    endGame(true);
+                    return;
+                }
+            } else {
+                lives--;
+                document.getElementById('lives-count').innerText = lives;
+                
+                document.body.style.backgroundColor = "#550000";
+                setTimeout(() => document.body.style.backgroundColor = "#000", 300);
+
+                if (lives <= 0) {
+                    endGame(false);
+                    return;
+                } else {
+                    alert("¡INCORRECTO! Neutralizaste la trampa equivocada. Pierdes 1 vida.");
+                }
+            }
+
+            loadLevel();
+        }
+
+        function endGame(victory) {
+            stopCurrentSound();
+            const overlay = document.getElementById('overlay');
+            const title = document.getElementById('overlay-title');
+            const msg = document.getElementById('overlay-msg');
+            const btn = document.getElementById('start-btn');
+
+            document.getElementById('main-game').classList.add('hidden');
+            overlay.classList.remove('hidden');
+
+            if (victory) {
+                title.innerText = "¡AMENAZAS NEUTRALIZADAS!";
+                title.style.color = "#4cff4c";
+                msg.innerText = "Lograste identificar correctamente todos los peligros y salir con vida.";
+                btn.innerText = "JUGAR DE NUEVO";
+            } else {
+                title.innerText = "TE HAN ATRAPADO";
+                title.style.color = "#8b0000";
+                msg.innerText = "No lograste identificar a tiempo el peligro correcto.";
+                btn.innerText = "REINTENTAR";
+            }
+        }
+    </script>
+</body>
+</html>
