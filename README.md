@@ -6,20 +6,17 @@ Repositorio de entregas y proyectos para el Taller de Interfaces.
 
 ---
 
-📁 [Tarea 01: Análisis de Interfaces — Cafetera FRIGIDAIRE](./Tarea-01/)
-
-Análisis esquemático, mapeo de interacciones (inputs/outputs) y lámina del producto.
-
----
-
-📁 [Tarea 02: Edición de Sonido y Experiencia Educativa](./Tarea-02/)
-
-* 🌐 **Juego en Vivo:** [Ecos en la Oscuridad](https://isi-espinoza.github.io/Portafolio-Taller-De-Interfaces/Tarea-02/)
-* 📄 **Documentación:** Revisa el concepto pedagógico y la edición de audio en la carpeta.
+📁 **Tarea 01: Análisis de Interfaces — Cafetera FRIGIDAIRE**
+* 📄 **Documentación:** [Ver README de Tarea 01](./Tarea-01/)
 
 ---
 
-📁 [Tarea 03: Síntesis y Control Sonoro en Max/MSP](./Tarea-03/)
+📁 **Tarea 02: Edición de Sonido y Experiencia Educativa**
+* 📄 **Documentación:** [Ver README y detalles de la Tarea 02](./Tarea-02/README.md)
+* 🌐 **Juego** [Ecos en la Oscuridad](https://isi-espinoza.github.io/Portafolio-Taller-De-Interfaces/Tarea-02/index.html)
 
+---
+
+📁 **Tarea 03: Síntesis y Control Sonoro en Max/MSP**
+* 📄 **Documentación:** [Ver README y guía de uso](./Tarea-03/README.md)
 * 🎥 **Video:** [T03 - Sintetizador Virtual (YouTube)](https://www.youtube.com/watch?v=L7ei7VBB9Hc)
-* 📄 **Documentación:** Revisa la guía de uso, análisis de módulos y el parche `.maxpat` en la carpeta.
