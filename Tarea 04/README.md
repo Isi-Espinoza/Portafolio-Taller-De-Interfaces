@@ -20,8 +20,8 @@ Esta entrega se divide en dos módulos de exploración complementarios:
 
 Para revisar el código fuente, la documentación técnica, los reproductores de audio y las muestras de cada proyecto, accede a sus respectivas carpetas:
 
-* 🎵 [Ejercicio 1: Sonificación de Datos](./Ejercicio 1-Sonificación de Datos)  
+* 🎵 [Ejercicio 1: Sonificación de Datos](./Ejercicio%201-Sonificación%20de%20Datos)
   *Contiene la documentación del mapeo de datos y el archivo de audio final generado.*
 
-* 🖼️ [Ejercicio 2: Sonificación de Imagen](./Ejercicio 2-Sonificacíon Imagen)  
-  *Contiene el juego interactivo (`index.html`), la fotografía de muestra, la textura de fondo y el archivo audio `.wav` exportado.*
+* 🖼️ [Ejercicio 2: Sonificación de Imagen](./Ejercicio%202-Sonificacíon%20Imagen)
+  *Contiene el juego interactivo (`index.html`), la fotografía de muestra, la textura de fondo y el archivo de audio `.wav` exportado.*
