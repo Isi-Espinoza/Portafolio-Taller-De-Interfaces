@@ -1,6 +1,6 @@
 # Portafolio Taller de Interfaces
 
-**Estudiante:** Isidora Espinoza Lillo  
+**Isidora Espinoza Lillo  
 **Proyecto:** T01 - Análisis de Interfaces — Cafetera FRIGIDAIRE  
 **Formato:** Esquemático 
 
