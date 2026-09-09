@@ -38,10 +38,10 @@ El análisis de la arquitectura mapea las interacciones de control, procesamient
 ![Modo Presentación](modo_presentacion.png)
 
 ### Modo Edición (Lógica del Parche)
-![Modo Edición](modo_edicion.png)
+![Modo Edición](modo_edicion.jpg)
 
 ---
 
 ## 4. Archivos del Repositorio
 
-* **Parche de Max/MSP:** [Descargar sintetizador.maxpat](./sintetizador.maxpat)
+* **Parche de Max/MSP:** [Descargar Sintetizador.maxpat](./Sintetizador.maxpat)
