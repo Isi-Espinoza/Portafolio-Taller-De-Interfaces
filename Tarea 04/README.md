@@ -23,6 +23,6 @@ Para revisar el código fuente, la documentación técnica, los reproductores de
 * 🎵 **[Ejercicio 1: Sonificación de Datos](./Ejercicio%201-Sonificación%20de%20Datos)**  
   *Contiene la documentación del mapeo de datos y el archivo de audio final generado.*
 
-* 🖼️ **[Ejercicio 2: Sonificación de Imagen (Huellas Sonoras)](./Ejercicio%202-Sonificación%20Imagen)**  
+* 🖼️ **[Ejercicio 2: Sonificación de Imagen](./Ejercicio%202-Sonificación%20Imagen)**  
   *Contiene el juego interactivo (`index.html`), la fotografía de muestra, la textura de fondo y el archivo audio `.wav` exportado.*
   
