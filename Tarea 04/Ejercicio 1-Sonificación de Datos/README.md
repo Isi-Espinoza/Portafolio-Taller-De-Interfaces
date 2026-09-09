@@ -5,9 +5,11 @@
 
 ---
 
-## 1. Lámina de Análisis de Datos y Sonificación
+## 1. Reproductor de Audio
 
-*(Espacio para incluir la captura de pantalla o gráfica interactiva de TwoTone con la distribución del audio exportado `canciontenis.mp3` y el dataset `basedatostenis.csv`).*
+<audio controls src="canciontenis.mp3">
+  Tu navegador no soporta el elemento de audio. <a href="canciontenis.mp3">Haz clic aquí para descargar el audio</a>.
+</audio>
 
 ---
 
