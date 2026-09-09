@@ -32,7 +32,20 @@ El análisis de la arquitectura mapea las interacciones de control, procesamient
 
 ---
 
-## 3. Interfaz Gráfica (Capturas de Pantalla)
+## 3. Guía de Uso de Controles e Interfaz
+
+Para interactuar con el sintetizador dentro de Max/MSP, sigue estos pasos:
+
+1. **Encender Audio (DSP):** Haz clic en el ícono del altavoz (`ezdac~`) o interruptor principal para iniciar el motor de audio en tiempo real.
+2. **Selección de Frecuencia / Nota:** 
+   * Haz clic sobre las teclas del **`kslider`** para ejecutar notas melódicas específicas dentro de la escala.
+   * Modifica el dial **`live.dial`** para realizar glissandos y barridos continuos de frecuencia sin restricciones de tono.
+3. **Control de Timbre y Amplitud:** Ajusta los faders de ganancia (`live.gain~`) para modular el nivel de salida y la mezcla de señal.
+4. **Visualización:** Observa el osciloscopio gráfico (**`scope~`**) para monitorear en tiempo real las variaciones morfológicas de la onda sonora generada.
+
+---
+
+## 4. Interfaz Gráfica (Capturas de Pantalla)
 
 ### Modo Presentación (UI)
 ![Modo Presentación](modo_presentacion.png)
@@ -42,6 +55,7 @@ El análisis de la arquitectura mapea las interacciones de control, procesamient
 
 ---
 
-## 4. Archivos del Repositorio
+## 5. Archivos del Repositorio
 
 * **Parche de Max/MSP:** [Descargar Sintetizador.maxpat](./Sintetizador.maxpat)
+* **Nota sobre Muestras de Audio:** *El proyecto genera su señal sonora mediante **síntesis digital interna** utilizando osciladores (`cycle~` / `saw~`). Al ser un sintetizador autónomo en tiempo real, no requiere la descarga ni inclusión de archivos/muestras de audio externas (`.wav` o `.mp3`).*
