@@ -11,7 +11,19 @@
 
 ---
 
-## 2. Descripción y Análisis del Proyecto
+## 2. Demostración en Video
+
+<div align="center">
+
+[![Demostración Hidro-Resonador](./miniatura-video.png)](ENLACE_A_TU_VIDEO_AQUI)
+
+*▶ Haz clic en la pantalla miniatura para reproducir el video de demostración*
+
+</div>
+
+---
+
+## 3. Descripción y Análisis del Proyecto
 
 ### Introducción al Objeto
 El **Hidro-Resonador** es un prototipo de **Interfaz Sonora Tangible** inspirado en las experiencias de aprendizaje interactivo del Museo Interactivo Mirador (MIM). El dispositivo reemplaza los pulsadores o teclas mecánicas convencionales por un mecanismo de contacto fluido e innovador: **el uso de agua salada como puente conductivo**. 
@@ -36,7 +48,7 @@ Mapeo de las interacciones físicas, lógicas y acústicas/sonoras del dispositi
 
 ---
 
-## 3. Explicación Técnica y Funcionamiento
+## 4. Explicación Técnica y Funcionamiento
 
 ### Hardware — Interruptor Creativo (Keyboard Hack)
 Se desarmó un teclado USB convencional para extraer su placa lógica controladora (encoder). Se identificaron las pistas de la matriz mediante mapeo de continuidad y se soldaron cables puente a los pares de pines específicos:
@@ -53,9 +65,8 @@ El procesamiento sonoro no requiere archivos de audio externos (como `.mp3` o `.
 
 ---
 
-## 4. Archivos de Código y Proceso (Entregables)
+## 5. Archivos de Código y Proceso (Entregables)
 
 * **Código Fuente:** Todo el funcionamiento de la interfaz, estilos y síntesis de audio se encuentra contenido en el archivo [`index.html`](./index.html).
 * **Archivos de Sonido / Librerías:** No aplica la inclusión de archivos de audio `.mp3` / `.wav` ni librerías de sonido externas, ya que la señal de audio es generada por síntesis en código mediante osciladores nativos de la Web Audio API.
-* **Registro Audiovisual (Video de Demostración):** Puedes ver el video de demostración funcional del prototipo en el siguiente enlace: **[Ver Video de Demostración](https://youtube.com)** *(reemplaza con tu enlace de YouTube, Drive o Vimeo)*.
 * **Registro del Proceso de Construcción:** Fotografías del desarme del teclado, soldadura de pines, mapeo de matriz y ensamble en la carpeta [`/fotosproceso`](./fotosproceso/).
