@@ -7,9 +7,7 @@
 
 ## 1. Lámina de Presentación y Registro de Proceso
 
-![Lámina de Presentación - Hidro-Resonador](lamina-presentacion.png)
-
-> **Nota:** Puedes visualizar el registro audiovisual del prototipo en funcionamiento real y el proceso de construcción en la sección de [Archivos de Proceso y Registro](#4-archivos-de-código-y-proceso).
+![Lámina de Presentación - Hidro-Resonador](./Lámina%20Botón%20Interactivo.png)
 
 ---
 
@@ -18,7 +16,7 @@
 ### Introducción al Objeto
 El **Hidro-Resonador** es un prototipo de **Interfaz Sonora Tangible** inspirado en las experiencias de aprendizaje interactivo del Museo Interactivo Mirador (MIM). El dispositivo reemplaza los pulsadores o teclas mecánicas convencionales por un mecanismo de contacto fluido e innovador: **el uso de agua salada como puente conductivo**. 
 
-Al hacer contacto físico con el agua en los recipientes, la conductividad eléctrica del líquido junto con la piel humana cierra la matriz lógica de un teclado desarmado (*keyboard hack*), enviando una señal digital en tiempo real que gatilla la generación de síntesis sonora mediante la Web Audio API en una interfaz web web interactiva.
+Al hacer contacto físico con el agua en los recipientes, la conductividad eléctrica del líquido junto con la piel humana cierra la matriz lógica de un teclado desarmado (*keyboard hack*), enviando una señal digital en tiempo real que gatilla la generación de síntesis sonora mediante la Web Audio API en una interfaz web interactiva.
 
 ---
 
@@ -48,9 +46,16 @@ Se desarmó un teclado USB convencional para extraer su placa lógica controlado
 Los extremos de estos cables se sumergieron dentro de recipientes con agua salada. Al introducir los dedos, la solución salina disuelta reduce la resistencia eléctrica, completando el circuito entre la masa y la línea de entrada analógica de la placa sin necesidad de presionar un botón mecánico.
 
 ### Software — Respuesta Sonora (Web Audio API)
-El procesamiento sonoro no utiliza archivos de audio externos (como `.mp3` o `.wav`) ni librerías de terceros; en su lugar, se implementó **síntesis sonora algorítmica** nativa en JavaScript mediante la `Web Audio API`:
+El procesamiento sonoro no requiere archivos de audio externos (como `.mp3` o `.wav`) ni librerías de terceros; en su lugar, se implementó **síntesis sonora algorítmica** nativa en JavaScript mediante la `Web Audio API`:
 1. El navegador detecta el evento de entrada (`keydown`) enviado por la placa del teclado hackeado.
 2. Se instancia un nodo de oscilador (`OscillatorNode`) configurado con onda triangular (`triangle`).
 3. Se modula la envolvente de amplitud mediante un nodo de ganancia (`GainNode`) con un *attack* inmediato de 0.01s y un *decay* exponencial de 1.2s para emular el comportamiento de un cuenco resonante.
 
-**Archivos de Sonido / Librerías:** No aplica la inclusión de archivos de audio `.mp3` / `.wav` ni librerías de sonido externas, ya que la señal de audio es generada por síntesis en código mediante osciladores nativos de 
+---
+
+## 4. Archivos de Código y Proceso (Entregables)
+
+* **Código Fuente:** Todo el funcionamiento de la interfaz, estilos y síntesis de audio se encuentra contenido en el archivo [`index.html`](./index.html).
+* **Archivos de Sonido / Librerías:** No aplica la inclusión de archivos de audio `.mp3` / `.wav` ni librerías de sonido externas, ya que la señal de audio es generada por síntesis en código mediante osciladores nativos de la Web Audio API.
+* **Registro Audiovisual (Video de Demostración):** Puedes ver el video de demostración funcional del prototipo en el siguiente enlace: **[Ver Video de Demostración](https://youtube.com)** *(reemplaza con tu enlace de YouTube, Drive o Vimeo)*.
+* **Registro del Proceso de Construcción:** Fotografías del desarme del teclado, soldadura de pines, mapeo de matriz y ensamble en la carpeta [`/fotosproceso`](./fotosproceso/).
