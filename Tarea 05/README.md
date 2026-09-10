@@ -24,12 +24,12 @@ Al hacer contacto físico con el agua en los recipientes, la conductividad eléc
 
 ### Mapeo de Interacciones (Inputs y Outputs)
 
-El presente análisis mapea las interacciones físicas, lógicas y acústicas/sonoras del dispositivo, clasificando sus componentes en **Entradas (Inputs)** y **Salidas (Outputs)**:
+Mapeo de las interacciones físicas, lógicas y acústicas/sonoras del dispositivo, clasificando sus componentes en **Entradas (Inputs)** y **Salidas (Outputs)**:
 
 #### Entradas (Inputs)
 * **01. Cuenco Conductivo 01 (Entrada Física / Hardware):** Recipiente con agua salada conectado a los pines de la placa del teclado (Pin S1-R2 / Tecla Shift). Al tocar el agua, se cierra el circuito por conductividad.
 * **02. Cuenco Conductivo 02 (Entrada Física / Hardware):** Recipiente con agua salada conectado a los pines de la placa del teclado (Pin S3-R5 / Tecla F9 / F10). Permite activar el segundo canal de entrada.
-* **03. Interfaz Virtual de Respaldos (Entrada Digital / Software):** Botones en la pantalla web que permiten simular la interacción mediante clics de ratón o eventos táctiles.
+* **03. Interfaz Virtual de Respaldos (Entrada Digital / Software):** Botones en la pantalla web que permiten simular la interacción mediante eventos táctiles.
 
 #### Salidas (Outputs)
 * **04. Síntesis Sonora DO (Salida Acústica / Audio):** Frecuencia de 261.63 Hz generada en tiempo real por un oscilador de onda triangular mediante la Web Audio API al activar el Cuenco 01.
