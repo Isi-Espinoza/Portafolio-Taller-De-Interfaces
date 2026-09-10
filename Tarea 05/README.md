@@ -15,9 +15,9 @@
 
 <div align="center">
 
-[![Demostración Hidro-Resonador](./miniatura-video.png)](ENLACE_A_TU_VIDEO_AQUI)
+[![Demostración Hidro-Resonador](https://img.youtube.com/vi/H3LDenhcHCQ/maxresdefault.jpg)](https://www.youtube.com/watch?v=H3LDenhcHCQ)
 
-*▶ Haz clic en la pantalla miniatura para reproducir el video de demostración*
+*▶ Haz clic en la pantalla miniatura para reproducir el video de demostración en YouTube*
 
 </div>
 
@@ -69,4 +69,5 @@ El procesamiento sonoro no requiere archivos de audio externos (como `.mp3` o `.
 
 * **Código Fuente:** Todo el funcionamiento de la interfaz, estilos y síntesis de audio se encuentra contenido en el archivo [`index.html`](./index.html).
 * **Archivos de Sonido / Librerías:** No aplica la inclusión de archivos de audio `.mp3` / `.wav` ni librerías de sonido externas, ya que la señal de audio es generada por síntesis en código mediante osciladores nativos de la Web Audio API.
+* **Registro Audiovisual:** [Ver Video de Demostración en YouTube](https://www.youtube.com/watch?v=H3LDenhcHCQ).
 * **Registro del Proceso de Construcción:** Fotografías del desarme del teclado, soldadura de pines, mapeo de matriz y ensamble en la carpeta [`/fotosproceso`](./fotosproceso/).
