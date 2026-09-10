@@ -1,4 +1,4 @@
-# Tarea 05: Dispositivo Interactivo "Keyboard Hack" — Hidro-Resonador
+# Tarea 05: Dispositivo Interactivo — Hidro-Resonador
 
 **Isidora Espinoza Lillo**  
 **Formato:** Esquemático  
