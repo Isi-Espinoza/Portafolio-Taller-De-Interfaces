@@ -53,12 +53,4 @@ El procesamiento sonoro no utiliza archivos de audio externos (como `.mp3` o `.w
 2. Se instancia un nodo de oscilador (`OscillatorNode`) configurado con onda triangular (`triangle`).
 3. Se modula la envolvente de amplitud mediante un nodo de ganancia (`GainNode`) con un *attack* inmediato de 0.01s y un *decay* exponencial de 1.2s para emular el comportamiento de un cuenco resonante.
 
----
-
-## 4. Archivos de Código y Proceso
-
-**Archivos de Sonido / Librerías:** No aplica la inclusión de archivos de audio `.mp3` / `.wav` ni librerías de sonido externas, ya que la señal de audio es generada por síntesis en código mediante osciladores nativos de la Web Audio API.
-* **Código Fuente:** Todo el funcionamiento de la interfaz, estilos y síntesis de audio se encuentra contenido en el archivo [`index.html`](./index.html).
-* **Registro del Proceso de Construcción:** Fotografías del desarme del teclado, soldadura de pines, mapeo de matriz y ensamble en la carpeta [`/proceso`](./proceso/).
-* **Registro Audiovisual (Video de Demostración):** Enlace directo al video con pantalla/título inicial del proyecto y cierre con la identificación del curso (Taller de Interfaces): [Ver Demostración en Video](https://youtube.com) *(reemplazar por tu enlace)*.
-* **Láminas y Diagramas:** Archivos en alta resolución en la carpeta [`/diagramas`](./diagramas/).
+**Archivos de Sonido / Librerías:** No aplica la inclusión de archivos de audio `.mp3` / `.wav` ni librerías de sonido externas, ya que la señal de audio es generada por síntesis en código mediante osciladores nativos de 
