@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Botón Interactivo</title>
+  <style>
+    /* VARIABLES DE COLOR */
+    :root {
+      --color-terracota: #b06c43;
+      --color-terracota-claro: #e28b54;
+      --color-terracota-oscuro: #5a2e16;
+      --texto-secundario: #cbd5e1;
+    }
+
+    body {
+      background-image: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.85)), url('fondo.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      
+      color: var(--color-terracota);
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* LÍNEA DECORATIVA AMPLIADA */
+    .linea-decorativa {
+      display: block;
+      width: 140px;
+      height: 4px;
+      background-color: var(--color-terracota);
+      margin: 15px auto 0;
+      border-radius: 2px;
+      box-shadow: 0 0 15px var(--color-terracota);
+    }
+
+    /* PANTALLA DE INICIO (OVERLAY) */
+    #overlay {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: linear-gradient(rgba(2, 6, 23, 0.92), rgba(2, 6, 23, 0.92)), url('fondo.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+      z-index: 100;
+      transition: opacity 0.8s ease, visibility 0.8s;
+    }
+
+    #overlay.oculto {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    #titulo-inicio {
+      font-size: 3.2rem;
+      color: var(--color-terracota);
+      margin-bottom: 0;
+      text-transform: uppercase;
+      letter-spacing: 5px;
+      text-shadow: 0 0 15px rgba(176, 108, 67, 0.3);
+    }
+
+    #descripcion-inicio {
+      font-size: 1rem;
+      color: #e2e8f0;
+      max-width: 680px;
+      line-height: 1.7;
+      margin-top: 30px;
+      margin-bottom: 45px;
+      font-weight: 300;
+    }
+
+    /* BOTÓN SIN FONDO (TEXTO PLANO) */
+    #btn-iniciar {
+      padding: 10px 20px;
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: var(--color-terracota);
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-shadow: 0 0 10px rgba(176, 108, 67, 0.3);
+    }
+
+    #btn-iniciar:hover {
+      color: var(--color-terracota-claro);
+      transform: scale(1.08);
+      text-shadow: 0 0 20px rgba(226, 139, 84, 0.8);
+    }
+
+    /* INTERFAZ PRINCIPAL */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-terracota);
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    .subtitulo-instruccion {
+      color: var(--texto-secundario);
+      font-size: 0.95rem;
+      font-weight: 300;
+      max-width: 620px;
+      margin: 22px auto 0;
+      line-height: 1.6;
+      letter-spacing: 0.5px;
+    }
+
+    /* CONTENEDOR DE CUENCOS */
+    .contenedor-cuencos {
+      display: flex;
+      gap: 60px;
+    }
+
+    .item-cuenco {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* ESTADO OSCURO / REPOSO DE LOS CUENCOS */
+    .cuenco {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background-color: rgba(2, 6, 23, 0.95);
+      backdrop-filter: blur(8px);
+      border: 2px solid #1e293b;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      transition: all 0.3s ease;
+      box-shadow: inset 0 0 15px rgba(0,0,0,0.9), 0 5px 15px rgba(0,0,0,0.5);
+      opacity: 0.65;
+      cursor: pointer;
+    }
+
+    .cuenco span.nota {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--color-terracota-oscuro);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+
+    /* TEXTO FUERA DEL CÍRCULO */
+    .info-contenedor {
+      margin-top: 18px;
+    }
+
+    p.info-titulo {
+      margin: 0;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #94a3b8;
+      transition: all 0.3s ease;
+    }
+
+    p.info-detalle {
+      margin: 4px 0 0 0;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #64748b;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+    }
+
+    /* ESTADO ACTIVO (ILUMINACIÓN Y COLOR TERRACOTA) */
+    .cuenco.activo {
+      opacity: 1;
+      background-color: rgba(30, 15, 10, 0.95);
+      border-color: var(--color-terracota-claro);
+      transform: scale(1.1) translateY(-8px);
+      box-shadow: 0 0 50px rgba(226, 139, 84, 0.7), inset 0 0 25px rgba(226, 139, 84, 0.5);
+    }
+
+    .cuenco.activo span.nota {
+      color: var(--color-terracota-claro);
+      text-shadow: 0 0 20px var(--color-terracota-claro);
+    }
+
+    .item-cuenco:has(.cuenco.activo) p.info-titulo {
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(226, 139, 84, 0.8);
+    }
+
+    .item-cuenco:has(.cuenco.activo) p.info-detalle {
+      color: var(--color-terracota-claro);
+    }
+
+    /* EFECTO DE ONDA TERRACOTA */
+    .cuenco::after {
+      content: '';
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: rgba(226, 139, 84, 0.4);
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .cuenco.activo::after {
+      animation: ondaAcuatica 0.6s ease-out;
+    }
+
+    @keyframes ondaAcuatica {
+      0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(1.6);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PANTALLA DE INICIO -->
+  <div id="overlay">
+    <h2 id="titulo-inicio">Hidro-Resonador</h2>
+    <div class="linea-decorativa"></div>
+    <p id="descripcion-inicio">
+      El <strong>Hidro-Resonador</strong> es un prototipo de <strong>Interfaz Sonora Tangible</strong> inspirado en las experiencias del Museo Interactivo Mirador (MIM). Reemplaza los pulsadores convencionales integrando un circuito de teclado desarmado mediante la técnica de <strong>Keyboard Hack</strong>.<br><br>Al hacer contacto con el agua, la conductividad física cierra el circuito y gatilla la generación de audio interactivo en tiempo real mediante síntesis sonora en la Web Audio API.
+    </p>
+    <button id="btn-iniciar">Iniciar</button>
+  </div>
+
+  <!-- INTERFAZ PRINCIPAL -->
+  <header>
+    <h1>Hidro-Resonador</h1>
+    <div class="linea-decorativa"></div>
+    <p class="subtitulo-instruccion">
+      Toca el agua salada de los cuencos para cerrar la conexión física y sintetizar frecuencias armónicas en tiempo real.
+    </p>
+  </header>
+
+  <main class="contenedor-cuencos">
+    <div class="item-cuenco">
+      <div id="btn-cuenco1" class="cuenco" data-freq="261.63">
+        <span class="nota">DO</span>
+      </div>
+      <div class="info-contenedor">
+        <p class="info-titulo">Cuenco 1</p>
+        <p class="info-detalle">Pin S1-R2 ➔ Tecla Shift (261.63 Hz)</p>
+      </div>
+    </div>
+    
+    <div class="item-cuenco">
+      <div id="btn-cuenco2" class="cuenco" data-freq="329.63">
+        <span class="nota">MI</span>
+      </div>
+      <div class="info-contenedor">
+        <p class="info-titulo">Cuenco 2</p>
+        <p class="info-detalle">Pin S3-R5 ➔ Tecla F9 / F10 (329.63 Hz)</p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let audioCtx = null;
+
+    const mapaCuencos = {
+      'shift': { freq: 261.63, elem: document.getElementById('btn-cuenco1') },
+      'f9':    { freq: 329.63, elem: document.getElementById('btn-cuenco2') },
+      'f10':   { freq: 329.63, elem: document.getElementById('btn-cuenco2') }
+    };
+
+    document.getElementById('btn-iniciar').addEventListener('click', () => {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      document.getElementById('overlay').classList.add('oculto');
+    });
+
+    function tocarNota(frecuencia) {
+      if (!audioCtx) return;
+
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(frecuencia, audioCtx.currentTime);
+
+      gain.gain.setValueAtTime(0, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.8, audioCtx.currentTime + 0.01);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 1.2);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + 1.2);
+    }
+
+    // INTERACCIÓN POR TECLADO / CIRCUITOS (KEYBOARD HACK)
+    window.addEventListener('keydown', (e) => {
+      const tecla = e.key.toLowerCase();
+
+      if (mapaCuencos[tecla]) {
+        e.preventDefault();
+
+        if (!e.repeat) {
+          tocarNota(mapaCuencos[tecla].freq);
+          mapaCuencos[tecla].elem.classList.add('activo');
+        }
+      }
+    });
+
+    window.addEventListener('keyup', (e) => {
+      const tecla = e.key.toLowerCase();
+
+      if (mapaCuencos[tecla]) {
+        e.preventDefault();
+        mapaCuencos[tecla].elem.classList.remove('activo');
+      }
+    });
+
+    // INTERACCIÓN POR CLIC DE MOUSE / TÁCTIL
+    document.querySelectorAll('.cuenco').forEach(cuenco => {
+      const activar = () => {
+        const freq = parseFloat(cuenco.getAttribute('data-freq'));
+        tocarNota(freq);
+        cuenco.classList.add('activo');
+      };
+
+      const desactivar = () => {
+        cuenco.classList.remove('activo');
+      };
+
+      cuenco.addEventListener('mousedown', activar);
+      cuenco.addEventListener('mouseup', desactivar);
+      cuenco.addEventListener('mouseleave', desactivar);
+
+      cuenco.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        activar();
+      });
+      cuenco.addEventListener('touchend', desactivar);
+    });
+  </script>
+</body>
+</html>
