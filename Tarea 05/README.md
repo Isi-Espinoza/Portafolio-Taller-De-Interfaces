@@ -1,8 +1,7 @@
-# Encargo 02: Dispositivo Interactivo mediante Keyboard Hack — Hidro-Resonador
+# Tarea 05: Dispositivo Interactivo "Keyboard Hack" — Hidro-Resonador
 
 **Isidora Espinoza Lillo**  
 **Formato:** Esquemático  
-**Curso:** Taller de Interfaces • Unidad 1: Interfaces Sonoras  
 
 ---
 
